@@ -3,7 +3,7 @@ description: >-
   Plug-and-play Blinkit/Uber/Instacart-style bottom navigation for Flutter.
   Auto-generates GoRouter StatefulShellRoute, Riverpod tab state, per-seller
   carts and an automatic add-to-cart button. No manual shell-route code.
-version: 0.1.0
+version: 0.2.0
 publish_to: none
 repository: https://github.com/phinehas/plug_bottom_nav
 

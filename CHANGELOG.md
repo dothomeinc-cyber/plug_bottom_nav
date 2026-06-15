@@ -1,3 +1,8 @@
+
+## 0.2.0
+
+- updated to latest version
+
 ## 0.1.0
 
 Initial release.
