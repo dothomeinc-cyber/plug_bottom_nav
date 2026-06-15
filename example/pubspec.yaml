@@ -1,0 +1,22 @@
+name: plug_bottom_nav_example
+description: Example app for plug_bottom_nav.
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.3.2-dev.2
+  go_router: ^14.6.2
+  plug_bottom_nav:
+    path: ../
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
