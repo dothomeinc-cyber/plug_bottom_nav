@@ -1,4 +1,9 @@
 
+## 0.7.0
+
+- package name changed
+
+
 ## 0.2.0
 
 - updated to latest version

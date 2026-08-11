@@ -1,24 +1,38 @@
-name: plug_bottom_nav
+name: plug_commerce_ui
 description: >-
-  Plug-and-play Blinkit/Uber/Instacart-style bottom navigation for Flutter.
-  Auto-generates GoRouter StatefulShellRoute, Riverpod tab state, per-seller
-  carts and an automatic add-to-cart button. No manual shell-route code.
-version: 0.2.0
-publish_to: none
-repository: https://github.com/phinehas/plug_bottom_nav
+  Plug-and-play Blinkit / Uber / Instacart-style UI for bottom navigation
+  and cart presentation. Auto-generates GoRouter shell routes; badges and
+  tab-index sync work off plain ValueListenable<int>/callbacks, so the
+  core library never imports flutter_riverpod (an optional adapter is
+  included separately for Riverpod users). Ships cart popup, seller cart
+  sheet, add-to-cart button, cart badge, and empty-cart widgets. Owns NO
+  cart data, storage, or checkout logic — your app supplies state and
+  callbacks; this package only renders.
+version: 0.7.0
+repository: https://github.com/phinehas/plug_commerce_ui
 
 environment:
   sdk: ">=3.4.0 <4.0.0"
-  flutter: ">=3.22.0"
+  flutter: ">=3.44.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_riverpod: ^3.3.2-dev.2
   go_router: ^17.3.0
   animations: ^2.0.11
+  # Required by the optional lib/src/riverpod/ adapter (imported only via
+  # plug_commerce_ui_riverpod.dart, a separate entry point from the core
+  # plug_commerce_ui.dart library). Dart has no concept of a dependency
+  # that's "real" only when a specific file is imported — every file under
+  # lib/ is part of the package and must resolve, so this has to be a
+  # normal dependency, not a dev_dependency (which broke `flutter analyze`
+  # entirely). If you never import plug_commerce_ui_riverpod.dart, this
+  # code is simply never compiled into your app — but pub still fetches it.
+  flutter_riverpod: ^3.3.2-dev.2
 
 dev_dependencies:
+  flutter_test:
+    sdk: flutter
   flutter_lints: ^6.0.0
 
 flutter:

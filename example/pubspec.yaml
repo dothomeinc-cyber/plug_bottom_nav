@@ -1,22 +1,24 @@
-name: plug_bottom_nav_example
-description: Example app for plug_bottom_nav.
-publish_to: none
+name: plug_commerce_ui_example
+description: Example app for plug_commerce_ui — bottom nav + cart UI flows.
+publish_to: 'none'
 version: 1.0.0
 
 environment:
-  sdk: ">=3.6.0 <4.0.0"
-  flutter: ">=3.27.0"
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.44.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  plug_commerce_ui:
+    path: ../
   flutter_riverpod: ^3.3.2-dev.2
   go_router: ^17.3.0
-  plug_bottom_nav:
-    path: ../
 
 dev_dependencies:
-  flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true

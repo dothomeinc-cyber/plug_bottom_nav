@@ -1,70 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:plug_bottom_nav/plug_bottom_nav.dart';
 
-import 'pages/account_page.dart';
-import 'pages/cart_page.dart';
-import 'pages/home_page.dart';
-import 'pages/search_page.dart';
+import 'app_shell.dart';
 
+/// plug_commerce_ui example app.
+///
+/// Shows the four things the package cares about:
+///   1. Bottom navigation (GoRouter shell, floating pill, live badge) —
+///      see app_shell.dart.
+///   2. Add-to-cart popup flow ("Added to: 🏪 CSP Traders / ... / View
+///      Cart") — see screens/home_screen.dart.
+///   3. Seller cart sheet — see screens/cart_screen.dart.
+///   4. Feature-first cart architecture, keeping the package UI-only —
+///      see features/cart/. The layering is:
+///
+///      features/cart/
+///        data/cart_repository.dart          — stands in for Firestore
+///        domain/cart_item.dart              — app's own model (has price/GST)
+///        domain/demo_catalog.dart           — sample product data
+///        presentation/cart_controller.dart  — Riverpod AsyncNotifier +
+///                                              the ONE mapping function
+///                                              (toPlugCartItem) from the
+///                                              domain model to the
+///                                              package's UI-only model
+///
+///      plug_commerce_ui never sees `CartItem`, price, or GST — only the
+///      `PlugCartItem`/`PlugSellerInfo` produced at that single mapping
+///      point. Swapping the in-memory `CartRepository` for real Firestore
+///      calls touches only data/cart_repository.dart.
 void main() {
-  // ProviderScope is required for Riverpod.
-  runApp(const ProviderScope(child: MyApp()));
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // === The ONLY navigation setup you write. No shell route boilerplate. ===
-  static final router = PlugBottomNavRouter.create(
-    initialLocation: '/home',
-    items: const [
-      PlugNavRoute(
-        path: '/home',
-        icon: Icons.home_outlined,
-        activeIcon: Icons.home,
-        label: 'Home',
-        page: HomePage(),
-      ),
-      PlugNavRoute(
-        path: '/search',
-        icon: Icons.search,
-        label: 'Search',
-        page: SearchPage(),
-      ),
-      PlugNavRoute(
-        path: '/cart',
-        icon: Icons.shopping_cart_outlined,
-        activeIcon: Icons.shopping_cart,
-        label: 'Cart',
-        page: CartPage(),
-      ),
-      PlugNavRoute(
-        path: '/account',
-        icon: Icons.person_outline,
-        activeIcon: Icons.person,
-        label: 'Account',
-        page: AccountPage(),
-      ),
-    ],
-    navConfig: const PlugBottomNavConfig(
-      pinned: true,
-      floating: true, // Uber-style floating pill
-      reverse: false,
-      backgroundColor: Colors.white,
-      selectedColor: Color(0xFF0A8754), // green
-      unselectedColor: Colors.grey,
-      animationType: PlugNavAnimationType.fadeThrough,
-    ),
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'plug_bottom_nav demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.green),
-      routerConfig: router,
-    );
-  }
+  runApp(const ProviderScope(child: AppShell()));
 }
